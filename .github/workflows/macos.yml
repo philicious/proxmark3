@@ -138,16 +138,14 @@ jobs:
           ln -s ../lualibs client/build/
 
       - name: Initiate cmake environment
-        run: cmake ..
-        working-directory: client/build/
+        run: cmake .
 
       - name: Build
         env:
           VERBOSE: 1
         run: make -j$((`sysctl -n hw.ncpu` + 1))
-        working-directory: client/build/
 
       - name: Test
         env:
           CHECKARGS: "--clientbin ./client/build/proxmark3"
-        run: make client/check
+        run: make check
